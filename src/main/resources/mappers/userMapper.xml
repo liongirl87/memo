@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.memo.user.DAO.UserMapper">
+ 	<select id="selectUserByLoginId" resultType="com.memo.user.model.User">
+ 		SELECT
+ 			`id`
+			,`loginId`
+			,`password`
+			,`name`
+			,`email`
+			,`profileImagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`user`
+ 	</select>
+ 	<insert id="insertUser" parameterType="map">
+ 		INSERT INTO `user`
+ 		(
+ 			`loginId`
+			,`password`
+			,`name`
+			,`email`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{loginId}
+ 			,#{password}
+ 			,#{name}
+ 			,#{email}
+ 			,NOW()
+ 			,NOW()
+ 		)
+ 			
+ 	
+ 	</insert>
+ 
+ 
+ </mapper>

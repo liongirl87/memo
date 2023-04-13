@@ -23,10 +23,46 @@
 </head>
 <body>
 	<div class="container" id= "wrap">
-		<header class="bg-secondary">
+		<header class="bg-light">
 			<h1>메모게시판</h1>
 		</header>
-	
+		<section>
+			<div class="col-6">
+				<table class="table text-center">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>제목</th>
+							<th>작성날짜</th>
+							<th>수정날짜</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${memoList}" var="memo">
+						<tr>
+							<td>${memo.id}</td>
+							<td>${memo.subject}</td>
+							<td>${memo.createdAt}</td>
+							<td>${memo.updatedAt}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<span><a href="#"><h3>이전</h3></a></span>
+				<span><a href="#"><h3>다음</h3></a></span>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary">글쓰기</button>
+			</div>
+		</section>
+		<footer>
+			<address class="bg-light">
+				<h3>copyright marobiana</h3>
+			</address>
+		
+		</footer>
 	
 	
 	

@@ -10,11 +10,12 @@
 			,`password`
 			,`name`
 			,`email`
-			,`profileImagePath`
 			,`createdAt`
 			,`updatedAt`
 		FROM
 			`user`
+		WHERE
+			`loginId` = #{loginId}
  	</select>
  	<insert id="insertUser" parameterType="map">
  		INSERT INTO `user`
@@ -38,6 +39,21 @@
  			
  	
  	</insert>
+ 	<select id="selectUserByLoginIdPassword" parameterType="map" resultType="com.memo.user.model.User">
+ 	 	SELECT
+ 			`id`
+			,`loginId`
+			,`password`
+			,`name`
+			,`email`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`user`
+		WHERE
+			`loginId` = #{loginId}
+			AND `password` = #{password} 	
+ 	</select>
  
  
  </mapper>

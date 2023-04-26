@@ -71,13 +71,14 @@ $(document).ready(function(){
 			,success:function(data) {	// call back 함수
 				if (data.result) {
 					// 중복
-					$("#idCheckDuplicated").removeClass("d-none")
+					$("#idCheckDuplicated").removeClass("d-none");
 				} else {
 					// 사용가능
-					$("#idCheckOk").removeClass("d-none")
+					$("#idCheckOk").removeClass("d-none");
 				}
 			}
 		});
+		
 		// 회원가입
 		$('#signUpForm').on('submit', function(e){
 			e.preventDefault(); // 서브밋 기능 중단
@@ -139,55 +140,3 @@ $(document).ready(function(){
 });
 
 </script>
-
-
-<!-- <div class="d-flex align-itmes-center justify-content-center">
-	<form method="post" action="/user/sign_in_view">
-		<table class="table border-1 mt-3">
-			<tr>
-				<div class="input-group">
-					<th class="back-color"><label for="id">*아이디</label></th>
-					<td>
-					<input type="text" class="form-control" id="id" name="id">
-					</td>
-				</div>
-			</tr>
-			<tr>
-				<div class="input-group">
-					<th class="back-color"><label for="password">*비밀번호</label></th>
-					<td>
-					<input type="password" class="form-control" id="password" name="password">
-					</td>
-				</div>
-			</tr>
-			<tr>
-				<div class="input-group">
-					<th class="back-color"><label for="passwordCheck">*비밀번호 확인</label></th>
-					<td>
-					<input type="password" class="form-control" id="passwordCheck" name="passwordCheck">
-					</td>
-				</div>
-			</tr>
-			<tr>
-				<div class="input-group">
-					<th class="back-color"><label for="name">*이름</label></th>
-					<td>
-					<input type="password" class="form-control" id="name" name="name">
-					</td>
-				</div>
-			</tr>
-			<tr>
-				<div class="input-group">
-					<th class="back-color"><label for="email">*이메일</label></th>
-					<td>
-					<input type="password" class="form-control" id="email" name="email">
-					</td>
-				</div>
-			</tr>
-		</table>
-	
-	
-	</form>
-
-
-</div> -->

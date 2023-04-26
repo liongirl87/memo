@@ -4,11 +4,10 @@ import java.util.Date;
 
 public class User {
 	private int id;
-	private int loginId;
+	private String loginId;
 	private String password;
 	private String name;
 	private String email;
-	private String profileImagePath;
 	private Date createdAt;
 	private Date updatedAt;
 	public int getId() {
@@ -17,10 +16,10 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getLoginId() {
+	public String getLoginId() {
 		return loginId;
 	}
-	public void setLoginId(int loginId) {
+	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
 	public String getPassword() {
@@ -41,12 +40,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getProfileImagePath() {
-		return profileImagePath;
-	}
-	public void setProfileImagePath(String profileImagePath) {
-		this.profileImagePath = profileImagePath;
-	}
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -59,7 +52,7 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
 	
 	
 }

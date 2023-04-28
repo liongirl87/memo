@@ -108,5 +108,29 @@
  		LIMIT 1
  	
  	</select>
+ 	<select id="countTotalPosts" resultType="int">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`post`
+ 	</select>
+ 	<select id="selectPostListByUserIdTest" parameterType="map" resultType="com.memo.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`subject`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `id` DESC
+		LIMIT ${skipLimit} ,${limit}
+		
+ 	
+ 	</select>
  
  </mapper>

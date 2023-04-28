@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.post.BO.PostBO;
 import com.memo.post.model.Post;
+import com.memo.post.model.PostPagingDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,6 +25,7 @@ public class postController {
 	public String postListView(
 			@RequestParam(value = "prevId", required=false) Integer prevIdParam,
 			@RequestParam(value = "nextId", required=false) Integer nextIdParam,
+			@RequestParam(value = "postPage" ,required=false) Integer postPage,
 			Model model,
 			HttpSession session) {
 		Integer userId = (Integer)session.getAttribute("userId");
@@ -33,26 +35,35 @@ public class postController {
 		}
 		int prevId = 0;
 		int nextId = 0;
-		List<Post> postList = postBO.getPostListByUserId(userId, prevIdParam, nextIdParam);
-		if (postList.isEmpty() == false) {	//postList가 비어있을 때 에러 방지 List는 null경우가 없다 비어있을떄도 [] 그래서 메소드를 사용함
-			// 리스트가 비어 있지 않으면 처리
-			prevId = postList.get(0).getId();
-			nextId = postList.get(postList.size() - 1).getId(); //.size() 함수로 크기구한 후 -1 하면 마지막 리스트 번호
-		
-			// 이전 방향의 끝인가?
-			// prevId와 post 테이블의 가장 큰 id와 같따면 이전 페이지 없음
-			if (postBO.isPrevLastPage(userId, prevId)) {
-				prevId=0;
-			}
-			
-			
-			// 다음 방향의 끝인가?
-			// nextId와 post 테이블의 가장 작은 id와 같다면 다음 페이지 없음
-			if (postBO.isNextLastPage(userId, nextId)) {
-				nextId = 0;
-			}
-		
+//		List<Post> postList = postBO.getPostListByUserId(userId, prevIdParam, nextIdParam);
+//		if (postList.isEmpty() == false) {	//postList가 비어있을 때 에러 방지 List는 null경우가 없다 비어있을떄도 [] 그래서 메소드를 사용함
+//			// 리스트가 비어 있지 않으면 처리
+//			prevId = postList.get(0).getId();
+//			nextId = postList.get(postList.size() - 1).getId(); //.size() 함수로 크기구한 후 -1 하면 마지막 리스트 번호
+//		
+//			// 이전 방향의 끝인가?
+//			// prevId와 post 테이블의 가장 큰 id와 같따면 이전 페이지 없음
+//			if (postBO.isPrevLastPage(userId, prevId)) {
+//				prevId=0;
+//			}
+//			
+//			
+//			// 다음 방향의 끝인가?
+//			// nextId와 post 테이블의 가장 작은 id와 같다면 다음 페이지 없음
+//			if (postBO.isNextLastPage(userId, nextId)) {
+//				nextId = 0;
+//			}
+//		
+//		}
+		// 총 페이징 
+		if (postPage == null) {
+			postPage = 1;
 		}
+		PostPagingDTO postpaging = new PostPagingDTO(postPage,postBO.countTotalPosts());
+		
+		List<Post> postList = postBO.getPostListByUserIdTest(userId, postpaging.getMysqlSkip() ,postpaging.getPostsperpage()); 
+		model.addAttribute("postPaging", postpaging);
+		
 		model.addAttribute("prevId", prevId);
 		model.addAttribute("nextId", nextId);
 		
@@ -77,6 +88,7 @@ public class postController {
 	@GetMapping("/post_detail_view")
 	public String postDetailView(
 			@RequestParam("postId") int postId,
+			@RequestParam("postPage") int postPage,	
 			HttpSession session,
 			Model model) {
 		
@@ -86,6 +98,7 @@ public class postController {
 		
 
 		model.addAttribute("post", post);
+		model.addAttribute("postPage", postPage);
 		model.addAttribute("view", "post/postDetail");
 		
 		return "template/layout";

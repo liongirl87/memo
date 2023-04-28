@@ -23,6 +23,8 @@ public class PostBO {
 	@Autowired
 	private PostMapper postMapper;
 	
+
+	
 	@Autowired
 	private FileManagerService fileManager;
 	
@@ -130,5 +132,15 @@ public class PostBO {
 		return nextId == postMapper.selectPostIdByUserIdSort(userId, "ASC");
 		
 	}
+	// 총 포스트된 숫자로 총 버튼 수 결정
+	public int countTotalPosts() {
+		return postMapper.countTotalPosts();
+	}
+	
+	// 수동으로 누른 페이징 버튼에 따라서 포스트 가져오기
+	public List<Post> getPostListByUserIdTest(int userId, int skipLimit, int limit){
+		return postMapper.selectPostListByUserIdTest(userId, skipLimit, limit);
+	}
+	
 	
 }

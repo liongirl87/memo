@@ -38,4 +38,9 @@ public interface PostMapper {
 	public int selectPostIdByUserIdSort(
 			@Param("userId") int userId,
 			@Param("sort") String sort);
+	public int countTotalPosts();
+	public List<Post> selectPostListByUserIdTest(
+			@Param("userId") int userId,
+			@Param("skipLimit") int skipLimit,
+			@Param("limit") int limit);
 }

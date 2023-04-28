@@ -23,7 +23,7 @@
 			<button type="button" id="postDeleteBtn" class="btn btn-secondary" data-post-id="${post.id}">삭제</button>
 			
 			<div>
-				<a href="/post/post_list_view" class="btn btn-dark">목록</a> 
+				<a href="/post/post_list_view?postPage=${postPage}" class="btn btn-dark">목록</a> 
 				<button type="button" id="saveBtn" class="btn btn-warning" data-post-id="${post.id}">수정</button>
 			</div>
 		</div>

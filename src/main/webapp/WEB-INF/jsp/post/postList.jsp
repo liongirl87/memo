@@ -19,7 +19,7 @@
 				<c:forEach items="${postList}" var="post">
 				<tr>
 					<td>${post.id}</td>
-					<td><a href="/post/post_detail_view?postId=${post.id}">${post.subject}</a></td>
+					<td><a href="/post/post_detail_view?postPage=${postPaging.nowPageNum}&postId=${post.id}">${post.subject}</a></td>
 					<td>
 					<fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" />
 					</td>
@@ -39,6 +39,24 @@
 			<a href="/post/post_list_view?nextId=${nextId}">다음 &gt;&gt;</a>
 			</c:if>
 		</div>
+		
+		<!-- 페이징 버튼 TEST -->
+		<div class="list_number">
+    		<div>
+	        	<p>
+	        		<div class="list_n_menu">
+	        			<a href="/post/post_list_view?postPage=${postPaging.nowPageNum - 1}" class="${postPaging.nowPageNum == 1 ? "disabled":"" }"><  이전</a>
+		        		<c:forEach begin="${postPaging.startPage}" end="${postPaging.endPage}" var="num">
+		        		<a href="/post/post_list_view?postPage=${num }" class="${postPaging.nowPageNum == num ? "current":"" }">${num}</a>
+		        		</c:forEach>
+		        		<a href="/post/post_list_view?postPage=${postPaging.nowPageNum + 1}" class="${postPaging.nowPageNum == postPaging.totalPages ? "disabled":"" }">다음  >
+		        		</a>
+	        		</div>
+	        	</p>
+    		</div>
+		</div>
+		<!--  페이징 버튼 TEST 끝 -->
+		
 		<div class="d-flex justify-content-end">
 			<a href="/post/post_create_view" class="btn btn-warning">글쓰기</a>
 		
